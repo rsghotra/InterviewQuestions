@@ -41,7 +41,17 @@ class Array {
         void LeftRotate();
         void RightShift();
         void RightRotate();
+        double Avg() const;
 };
+
+double Array::Avg() const {
+    double avg;
+    double sum;
+    for(int i = 0; i < this->length; i++) {
+        sum += this->A[i];
+    }
+    return sum/this->length;
+}
 
 int Array::Search(const int& val) const {
     if(this->length == 0) return -1;
@@ -252,8 +262,9 @@ int main() {
     arr.RightRotate();
     cout << "Right Rotate: ";
     arr.Display();
-
-
+    
+    cout << "Displaying Average of Array: " << endl;
+    cout << arr.Avg();
 
     return 0;
 }

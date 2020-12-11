@@ -36,6 +36,7 @@ class Array {
         int  Search_MOVE_HEAD(const int& val);
         void Swap(int& x, int& y);
         void MinMax() const;
+        void Reverse();
 };
 
 int Array::Search(const int& val) const {
@@ -156,6 +157,12 @@ void Array::MinMax() const {
     cout << "Min Element in the array: " << max << endl;
 }
 
+void Array::Reverse() {
+    for(int i = 0, j = this->length-1; i < j; i++, j--) {
+        this->Swap(this->A[i], this->A[j]);
+    }
+}
+
 int main() {
 
     default_random_engine engine{static_cast<unsigned int>(time(0))};
@@ -190,6 +197,8 @@ int main() {
     }
 
     arr.MinMax();
+    arr.Reverse();
+    arr.Display();
 
     return 0;
 }

@@ -45,7 +45,8 @@
         "deque": "cpp",
         "stack": "cpp",
         "queue": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "random": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }

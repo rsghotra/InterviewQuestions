@@ -127,6 +127,52 @@ vector<int> Union(const vector<int>& set1, const vector<int>& set2) {
     return output;
 }
 
+vector<int> Intersection(const vector<int>& vectX, const vector<int>& vectY) {
+    vector<int> output;
+    if(isSorted(vectX) && isSorted(vectY)) {
+        int i = 0;
+        int j = 0;
+        while(i < vectX.size() && j < vectY.size()) {
+            if(vectX.at(i) < vectY.at(j)) {
+                i++;
+                j++;
+            } else if(vectX.at(i) > vectY.at(j)) {
+                i++;
+                j++;
+            } else {
+                output.push_back(vectX.at(i));
+                i++;
+                j++;
+            }
+        }
+    }
+    return output;
+}
+
+vector<int> Difference(const vector<int>& vect1, const vector<int>& vect2) {
+    vector<int> output;
+    if(isSorted(vect1) && isSorted(vect2)) {
+        int i = 0;
+        int j = 0;
+        while(i < vect1.size() && j < vect2.size()) {
+            if(vect1.at(i) < vect2.at(j)) {
+                output.push_back(vect1.at(i));
+                i++;
+            } else if(vect1.at(i) > vect2.at(j)) {
+                j++;
+            } else {
+                i++;
+                j++;
+            }
+        }
+        //As it is A - B. We only need to copy left over element of A
+        while(i < vect1.size()) {
+            output.push_back(vect1.at(i));
+            i++;
+        }
+    }
+    return output;
+}
 
 int main() {
     vector<int> vect1{1,4,6,8,10,12,14};
@@ -147,7 +193,7 @@ int main() {
     Display(vect4);
 
     cout << "Set Operations Union, Find, Intersection, Difference: " << endl;
-    vector<int> set1{3,5,10,4,6};
+    vector<int> set1{3,5,10,4,6,11};
     vector<int> set2{12,4,7,2,5};
 
     vector<int> set3 = Union_UnSorted(set1, set2);
@@ -168,7 +214,14 @@ int main() {
     cout << "Set2: ";
     Display(set2);
     set3 = Union(set1, set2);
-    cout << "Union-Sorted Set: " << endl;
+    cout << "Union-Sorted Sets: " << endl;
+    Display(set3);
+    cout << "Intersection-Sorted Sets: " << endl;
+    set3 = Intersection(set1, set2);
+    Display(set3);
+
+    cout << "Difference-Sorted Sets: " << endl;
+    set3 = Difference(set1, set2);
     Display(set3);
     return 0;
 }

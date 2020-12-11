@@ -35,6 +35,7 @@ class Array {
         int  Search_TRANSPOSE(const int& val);
         int  Search_MOVE_HEAD(const int& val);
         void Swap(int& x, int& y);
+        void MinMax() const;
 };
 
 int Array::Search(const int& val) const {
@@ -141,6 +142,20 @@ int Array::Delete(const int& index) {
     return val;
 }
 
+void Array::MinMax() const {
+    int max = INT_MIN;
+    int min = INT_MAX;
+    for(int i = 0; i < this->length; i++) {
+        if(this->A[i] < min) {
+            min = this->A[i];
+        } else if(this->A[i] > max) {
+            max = this->A[i];
+        }
+    }
+    cout << "Max Element in the array: " << min << endl;
+    cout << "Min Element in the array: " << max << endl;
+}
+
 int main() {
 
     default_random_engine engine{static_cast<unsigned int>(time(0))};
@@ -173,6 +188,8 @@ int main() {
         cout << "Searching for(Move Head) " <<  val << " and found at " << arr.Search_MOVE_HEAD(val)<< endl;
         arr.Display();
     }
+
+    arr.MinMax();
 
     return 0;
 }

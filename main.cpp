@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<algorithm>
 using namespace std;
 
 
@@ -77,6 +78,56 @@ void Insert(vector<int>& vect, int data) {
 }
 
 
+vector<int> Union_UnSorted(const vector<int>& vect1, const vector<int>& vect2) {
+    // O(m + m*n) = O(n2)
+    vector<int> output;
+    int i = 0;
+    //copy first set - O(m)
+    while(i < vect1.size())
+    {
+        output.push_back(vect1.at(i));
+        i++;
+    }
+
+    for(int j = 0; j < vect2.size(); j++) {
+        bool found = false;
+        for(int k = 0; k < vect1.size(); k++) {
+            if(vect1.at(k) == vect2.at(j)) {
+                found = true;
+            }
+        }
+        if(!found) {
+            output.push_back(vect2.at(j));
+        }
+    }
+    return output;
+}
+
+vector<int> Union(const vector<int>& set1, const vector<int>& set2) {
+    //O(m+n) => O(n)
+    //it will be like merting two sorted vector
+    vector<int> output;
+    if(isSorted(set1) && isSorted(set2)) {
+        int i = 0;
+        int j = 0;
+        while(i < set1.size() && set2.size()) {
+            if(set1.at(i) < set2.at(j)) {
+                output.push_back(set1.at(i));
+                i++;
+            } else if(set1.at(i) > set2.at(j)) {
+                output.push_back(set2.at(j));
+                j++;
+            } else {
+                output.push_back(set1.at(i));
+                i++;
+                j++;
+            }
+        }
+    }
+    return output;
+}
+
+
 int main() {
     vector<int> vect1{1,4,6,8,10,12,14};
     vector<int> vect2{1,3,5,7,9,11,13,15};
@@ -91,12 +142,34 @@ int main() {
 
     vector<int> vect4{-6,3,-8,10,5,-7,-9,12,-4, 2};
     Display(vect4);
-    cout << "Separating +ve and -ve numbers" << endl;
+    cout << "Separating +ve and -ve numbers: ";
     Separator(vect4);
     Display(vect4);
 
+    cout << "Set Operations Union, Find, Intersection, Difference: " << endl;
+    vector<int> set1{3,5,10,4,6};
+    vector<int> set2{12,4,7,2,5};
 
+    vector<int> set3 = Union_UnSorted(set1, set2);
+    cout << "Displaying Union of two Unsorted Sets: " << endl;
+    cout << "Set1: ";
+    Display(set1);
+    cout << "Set2: ";
+    Display(set2);
+    cout << "Union-Unsorted Set: " << endl;
+    Display(set3);
 
+    cout << "==>UNION of TWO SORTED SETS: " << endl;
+    std::sort(set1.begin(), set1.end());
+    std::sort(set2.begin(), set2.end());
+    cout << "Displaying Union of two SORTED Sets(O(N)): " << endl;
+    cout << "Set1: ";
+    Display(set1);
+    cout << "Set2: ";
+    Display(set2);
+    set3 = Union(set1, set2);
+    cout << "Union-Sorted Set: " << endl;
+    Display(set3);
     return 0;
 }
 

@@ -37,6 +37,10 @@ class Array {
         void Swap(int& x, int& y);
         void MinMax() const;
         void Reverse();
+        void LeftShift();
+        void LeftRotate();
+        void RightShift();
+        void RightRotate();
 };
 
 int Array::Search(const int& val) const {
@@ -99,7 +103,6 @@ void Array::Display() const {
     if(this->length == 0) return;
     for(int i{0}; i < this->length ; i++) {
         cout << this->A[i] << " ";
-        if(i%5 == 0) cout << endl;
     }
     cout << endl;
 }
@@ -163,32 +166,67 @@ void Array::Reverse() {
     }
 }
 
+//KEY FOR ROTATION AND SHIFTING IS BOUND CHECK WILL HAPPEN ON (i+1) or (i-1)
+void Array::LeftShift() {
+    int i;
+    for(i = 0; i+1 < this->length; i++) {
+        //backward copy
+        this->A[i] = this->A[i+1];
+    }
+    this->A[i] = 0;
+}
+
+void Array::LeftRotate() {
+    int i = 0;
+    int val = this->A[i];
+    for(i; i+1 < this->length; i++) {
+        this->A[i] = this->A[i+1];
+    }
+    this->A[i] = val;
+}
+
+void Array::RightShift() {
+    int i;
+    for(i = this->length-1; i-1 >=0; i--) {
+        this->A[i] = this->A[i-1];
+    }
+    this->A[i] = 0;
+}
+
+void Array::RightRotate() {
+    int i;
+    int val = this->A[this->length-1];
+    for(i = this->length-1; i-1 >= 0; i--) {
+        this->A[i] = this->A[i-1];
+    }
+    this->A[i] = val;
+}
+
 int main() {
 
     default_random_engine engine{static_cast<unsigned int>(time(0))};
     uniform_int_distribution<unsigned int> randomInt{1, 100};
 
-    Array arr(200);
+    Array arr(20);
 
-    for(size_t i{0}; i < 100; ++i) {
+    for(size_t i{0}; i < 10; ++i) {
         arr.Insert(i, randomInt(engine));
     }
-    arr.Insert(100, 101);
+    arr.Insert(3, 101);
     arr.Display();
 
-    for(int i{0}; i < 50; i++) {
-        cout << "Deleted: " << arr.Delete(i) << " ";
-        if(i%5 == 0) cout << endl;
-    }
-    cout << endl;
+    // for(int i{0}; i < 10; i++) {
+    //     cout << "Deleted: " << arr.Delete(i) << " ";
+    //     if(i%5 == 0) cout << endl;
+    // }
+    // cout << endl;
    
     arr.Display();
-    cout << "Getting: " << arr.Get(10) << endl;
-    cout << "Setting: -99 at index 10" << endl;
-    arr.Set(10, -99);
-    cout << "Getting: " << arr.Get(10) << endl;
+    cout << "Setting: -99 at index 0" << endl;
+    arr.Set(0, -99);
+    cout << "Getting: " << arr.Get(0) << endl;
 
-    for(int i{0}; i < 15; i++) {
+    for(int i{0}; i < 10; i++) {
         int val = randomInt(engine);
         cout << "Searching(Transpose)for " <<  val << " and found at " << arr.Search_TRANSPOSE(val)<< endl;
         arr.Display();
@@ -199,6 +237,23 @@ int main() {
     arr.MinMax();
     arr.Reverse();
     arr.Display();
+
+    cout << "Rotation of Arrays: " << endl;
+    arr.LeftShift();
+    cout << "Left Shifted: ";
+    arr.Display();
+    arr.LeftRotate();
+    cout << "Left Rotate: ";
+    arr.Display();
+    arr.RightShift();
+    cout << "Right Shifted: ";
+    arr.Display();
+    
+    arr.RightRotate();
+    cout << "Right Rotate: ";
+    arr.Display();
+
+
 
     return 0;
 }

@@ -19,28 +19,6 @@ bool isSorted(const vector<int>& vect) {
     return status;
 }
 
-void FindMultipleMissingElems_SORTED(const vector<int>& vect) {
-
-    //i will need three thigs. l, h, n
-    int low = vect[0];
-    int high = vect[vect.size() - 1 ];
-    int index = 0;
-    int diff = low - index;
-
-    cout << "Missing elements in a sorted array: " << endl;
-    for(int i=0; i < vect.size(); i++) {
-        int indexDifference = vect.at(i) - i;
-        if(indexDifference != diff) {
-            while(diff < indexDifference) {
-                cout << i + diff << " ";
-                diff++;
-            }
-        }
-    }
-    cout << endl;
-
-}
-
 int Max(const vector<int>& vect1) {
     int max = INT_MIN;
     for(int i = 0; i < vect1.size(); i++) {
@@ -57,23 +35,50 @@ int Min(const vector<int>& vect1) {
     return min;
 }
 
-void FindMultipleMissingElems_UNSORTED(const vector<int>& vect) {
-    int low = Min(vect);
-    int high = Max(vect);
 
-    int* H = new int[high+1]();
-
-    for(int i = 0; i < vect.size(); i++) {
-        H[vect.at(i)]++;
-    }
-    cout << "Multiple missing elements from UNSORTED: ";
-    for(int j = low; j <= high; j++) {
-        if(H[j] == 0) {
-            cout << j << " ";
+void FindMultipleMissingElems_SORTED(const vector<int> vect) {
+    if(isSorted(vect)) {
+        int index = 0;
+        int diff = vect[0] - index;
+        cout << "Multiple Missing Elements in a Sorted List: " << endl;
+        for(int i = 0; i < vect.size(); i++) {
+            //diff is found by reading index number and element present at the index
+            int travelDiff = vect.at(i) - i;
+            if(travelDiff != diff) {
+                //missing elements found
+                //need to bring diff to travel diff in order to travel further
+                while(diff < travelDiff) {
+                    //diff + i will give the first number what it should have been there
+                    cout << diff + i << " ";
+                    diff++;
+                }
+            }
         }
+        cout << endl;
     }
-    cout << endl;
+}
 
+void FindMultipleMissingElems_UNSORTED(const vector<int> vect) {
+    //vector must be unsorted for this algorithm
+    //max - min & Hash Table will be used
+    if(!isSorted(vect)) {
+        cout << "Finding Multiple Missing elements in an Unsorted Array: " << endl;
+        int max = Max(vect);
+        int min = Min(vect);
+        //HASH size must be max+1 as we will not use index 1
+        int* H = new int[max+1]();
+
+        for(int i = 0; i < vect.size(); i++) {
+            H[vect.at(i)]++;
+        }
+
+        for(int j = min; j <= max; j++) {
+            if(H[j] == 0) {
+                cout << j << " ";
+            }
+        }
+        cout << endl;
+    }
 }
 
 void FindMultipleMissingElem(const vector<int>& vect) {
@@ -83,8 +88,8 @@ void FindMultipleMissingElem(const vector<int>& vect) {
 
 
 int main() {
-    vector<int> vect1{1,4,6,8,10,12,14};
+    vector<int> vect1{1,4,6,8,10,12,14,18};
     FindMultipleMissingElems_SORTED(vect1);
-    vector<int> vect2{3,7,4,9,12,6,1,11,2,10};
+    vector<int> vect2{3,7,4,9,12,6,1, 11, 2, 10, 14};
     FindMultipleMissingElems_UNSORTED(vect2);
 }

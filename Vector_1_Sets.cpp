@@ -110,7 +110,7 @@ vector<int> Union(const vector<int>& set1, const vector<int>& set2) {
     if(isSorted(set1) && isSorted(set2)) {
         int i = 0;
         int j = 0;
-        while(i < set1.size() && set2.size()) {
+        while(i < set1.size() && j < set2.size()) {
             if(set1.at(i) < set2.at(j)) {
                 output.push_back(set1.at(i));
                 i++;
@@ -122,6 +122,14 @@ vector<int> Union(const vector<int>& set1, const vector<int>& set2) {
                 i++;
                 j++;
             }
+        }
+        while(i < set1.size()) {
+            output.push_back(set1.at(i));
+            i++;
+        }
+        while(j < set2.size()) {
+            output.push_back(set2.at(j));
+            j++;
         }
     }
     return output;

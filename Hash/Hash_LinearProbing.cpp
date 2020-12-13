@@ -40,7 +40,7 @@ int HashTable::LinearProbe(int key) {
     int i = 0;
     do {
         if(this->HT[(index+i)%SIZE] == 0) {
-            return this->HT[(index+i)%SIZE];
+            return (index+i)%SIZE;
         }
         i++;
     } while((index+i)%SIZE != index);
@@ -68,8 +68,12 @@ int HashTable::Search(int key) {
     if(this->HT[index] == key) return index;
     int i = 0;
     do {
+        //the moment we see ZERO means the element is not present
+        if(this->HT[(index+i)%SIZE] == 0) {
+            return -1;
+        }
         if(this->HT[(index+i)%SIZE] == key) {
-            return this->HT[(index+i)%SIZE];
+            return (index+i)%SIZE;
         }
         i++;
     } while((index+i)%SIZE != index);

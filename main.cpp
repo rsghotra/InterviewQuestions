@@ -85,6 +85,37 @@ int Compareor(string& str1, string& str2) {
     }
 }
 
+/*
+    - Both strings must be of same length
+    - Both string must consists of same letters
+    - Iterative Solution Presented Here - Do not expect duplicated in the string
+    - Hash Table Solutions Can Work on strings containing duplicates
+*/
+
+void AreAnagrams_Iterative(string& str1, string& str2) {
+
+}
+
+void AreAnagrams_Hash(string& str1, string& str2) {
+    if(str1.length() != str2.length()) {
+        cout << "Strings are not Anagrams" << endl;
+        return;
+    }
+    int Hash[27]{0}; //initialized with zero
+    //traverse over str1
+    for(int i=0; str1[i] != '\0'; i++) {
+        Hash[str1[i] - 97]++;
+    }
+    for(int j=0; str2[j] != '\0'; j++) {
+        Hash[str2[j] - 97]--;
+        if(Hash[str2[j] - 97] < 0) {
+            cout << "Strings are not Anagrams." << endl;
+            return;
+        }
+    }
+    cout << "Strings are Anagrams." << endl;
+}
+
 int main() {
     string str1{"FaceBook Interview IS on jAN 7th 2020."};
     cout << "Length of " << Length(str1) << endl;
@@ -97,6 +128,9 @@ int main() {
     string str2 = "Ranveer";
     isPalindrome(str2);
     Compareor(str1, str2);
+    string str3 = "delcimal";
+    string str4 = "medicall";
+    AreAnagrams_Hash(str3, str4);
     return 0;
 }
 

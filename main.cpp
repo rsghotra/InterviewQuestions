@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<cctype>
 using namespace std;
 
 int Length(const string& str) {
@@ -42,11 +43,20 @@ void WordCalculator(string& str) {
     cout << "Number of words are: " << space+1 << endl;
 }
 
-void Swap(char& x, char& y) {
-    
+void isPalindrome(string& str) {
+    int i = 0;
+    int j = str.length()-1;
+
+    for(i,j; i < j; i++, j--) {
+        if(tolower(str[i]) != tolower(str[j])) {
+            cout << "Not Palindrome" << endl;
+            return;
+        }
+    }
+    cout << "Palindrome" << endl;
 }
 
-void Reverse(string& str) {
+void Reverse(string str) {
     int i =0;
     int j = str.length() - 1;
     for(i, j; i < j; i++, j--) {
@@ -66,6 +76,8 @@ int main() {
     WordCalculator(str1);
     Reverse(str1);
     Reverse(str1);
+    string str2 = "Ranveer";
+    isPalindrome(str2);
     return 0;
 }
 

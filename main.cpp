@@ -40,7 +40,21 @@ void WordCalculator(string& str) {
         }
     }
     cout << "Number of words are: " << space+1 << endl;
+}
 
+void Swap(char& x, char& y) {
+    
+}
+
+void Reverse(string& str) {
+    int i =0;
+    int j = str.length() - 1;
+    for(i, j; i < j; i++, j--) {
+        char temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;;
+    }
+    cout << "String after Reversing: " << str << endl;
 }
 
 int main() {
@@ -50,6 +64,8 @@ int main() {
     cout << str1 << endl;
     CountVowelsAndConsonants(str1);
     WordCalculator(str1);
+    Reverse(str1);
+    Reverse(str1);
     return 0;
 }
 

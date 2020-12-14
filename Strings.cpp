@@ -67,7 +67,7 @@ void Reverse(string str) {
     cout << "String after Reversing: " << str << endl;
 }
 
-int Compareor(string& str1, string& str2) {
+void Compareor(string& str1, string& str2) {
     int i = 0; 
     int j = 0;
     for(i,j; i < str1.length() && j < str2.length(); i++, j++) {
@@ -92,7 +92,7 @@ int Compareor(string& str1, string& str2) {
     - Hash Table Solutions Can Work on strings containing duplicates
 */
 
-void AreAnagrams_Iterative(string& str1, string& str2) {
+void AreAnagrams_Bitset(string& str1, string& str2) {
 
 }
 
@@ -116,6 +116,19 @@ void AreAnagrams_Hash(string& str1, string& str2) {
     cout << "Strings are Anagrams." << endl;
 }
 
+void Duplicates_Hash(string& str) {
+    int Hash[27]{0};
+
+    for(int i=0; i < str.length(); i++) {
+        Hash[str[i] - 97]++;
+    }
+    for(int i = 1; i < 27; i++) {
+        if(Hash[i] > 1) {
+            cout << char(i+97) << " is repeating " << Hash[i] << " times." << endl;
+        }
+    }
+}
+
 int main() {
     string str1{"FaceBook Interview IS on jAN 7th 2020."};
     cout << "Length of " << Length(str1) << endl;
@@ -131,6 +144,8 @@ int main() {
     string str3 = "delcimal";
     string str4 = "medicall";
     AreAnagrams_Hash(str3, str4);
+    string str5 = "ranveer";
+    Duplicates_Hash(str5);
     return 0;
 }
 

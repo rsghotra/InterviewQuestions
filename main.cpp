@@ -67,6 +67,24 @@ void Reverse(string str) {
     cout << "String after Reversing: " << str << endl;
 }
 
+int Compareor(string& str1, string& str2) {
+    int i = 0; 
+    int j = 0;
+    for(i,j; i < str1.length() && j < str2.length(); i++, j++) {
+        if(str1[i] != str2[i]) {
+            break;
+        }
+    }
+    if(str1[i] == '\0' && str2[j] == '\0') {
+        cout << "Same Strings" << endl;
+    }
+    else if(str1[i] < str2[j]) {
+        cout << "Second string is larger than first string" << endl;
+    } else if(str1[i] > str2[j]) {
+        cout << "First string is larger than the second string" << endl;
+    }
+}
+
 int main() {
     string str1{"FaceBook Interview IS on jAN 7th 2020."};
     cout << "Length of " << Length(str1) << endl;
@@ -78,6 +96,7 @@ int main() {
     Reverse(str1);
     string str2 = "Ranveer";
     isPalindrome(str2);
+    Compareor(str1, str2);
     return 0;
 }
 

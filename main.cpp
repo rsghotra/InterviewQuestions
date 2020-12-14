@@ -1,4 +1,5 @@
 #include<iostream>
+#include<stack>
 using namespace std;
 
 struct Node {
@@ -123,6 +124,41 @@ Node* Merge(Node* root1, Node* root2) {
         ptr->next = first;
     }
     return root;
+}
+
+Node* Concatenate(Node* ptr1, Node* ptr2) {
+    if(ptr1 == 0 && ptr2 == 0) return nullptr;
+    if(ptr1 && ptr2 == 0) return ptr1;
+    if(ptr2 && ptr1 == 0) return ptr2;
+
+    Node* temp = ptr1;
+    while(temp->next) {
+        temp = temp->next;
+    }
+    temp->next = ptr2;
+    return ptr1;
+}
+
+Node* Intersection(Node* ll1, Node* ll2) {
+    stack<Node*> stk1;
+    stack<Node*> stk2;
+    while(ll1) {
+        stk1.push(ll1);
+        ll1 = ll1->next;
+    }
+    while(ll2) {
+        stk2.push(ll2);
+        ll2=ll2->next;
+    }
+    Node* ptr = 0;
+    while(!stk1.empty() && !stk2.empty() && stk1.top() == stk2.top()) {
+        ptr = stk1.top();
+        stk1.pop();
+        stk2.pop();
+    }
+    return ptr;
+
+
 }
 
 Node* delete_at(Node* ptr, int pos) {

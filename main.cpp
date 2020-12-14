@@ -18,11 +18,25 @@ void ToggleCaser(string& str) {
     }
 }
 
+void CountVowelsAndConsonants(string& str1) {
+    int vowels=0;
+    int consonants=0;
+    for(int i=0; i < str1.length(); i++) {
+        if(str1[i] == 'A' || str1[i] == 'a' || str1[i] == 'E' || str1[i] == 'e' || str1[i] == 'I' ||
+            str1[i] == 'i' || str1[i] == 'O' || str1[i] == 'o' || str1[i] == 'U' || str1[i] == 'u') {
+                vowels++;
+        } else consonants++;
+    }
+    cout << "Number of Vowels: " << vowels << endl;
+    cout << "Number of Consonants: " << consonants << endl;
+}
+
 int main() {
     string str1{"FaceBook Interview IS on jAN 7th 2020."};
     cout << "Length of " << Length(str1) << endl;
     ToggleCaser(str1);
     cout << str1 << endl;
-
+    CountVowelsAndConsonants(str1);
+    return 0;
 }
 

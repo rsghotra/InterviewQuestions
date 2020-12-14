@@ -31,12 +31,25 @@ void CountVowelsAndConsonants(string& str1) {
     cout << "Number of Consonants: " << consonants << endl;
 }
 
+void WordCalculator(string& str) {
+    //no of words = space + 1; Space's ASCII code = 13
+    int space=0;
+    for(int i = 0; i < str.length(); i++) {
+        if(str[i] == ' ' && str[i-1] != ' ') {
+            space++;
+        }
+    }
+    cout << "Number of words are: " << space+1 << endl;
+
+}
+
 int main() {
     string str1{"FaceBook Interview IS on jAN 7th 2020."};
     cout << "Length of " << Length(str1) << endl;
     ToggleCaser(str1);
     cout << str1 << endl;
     CountVowelsAndConsonants(str1);
+    WordCalculator(str1);
     return 0;
 }
 

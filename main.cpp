@@ -150,7 +150,7 @@ int Height(Node* root) {
         return 0;
     }
     if(root->left == 0 && root->right == 0) {
-        return 0;
+        return 0; //option if you want to keep the height as 1 for zeroth node
     }
     int left = Height(root->left);
     int right = Height(root->right);
@@ -187,8 +187,29 @@ void _Count() {
     cout << "Number of Nodes: " << Count(root) << endl;
 }
 
+/*https://algorithms.tutorialhorizon.com/diameter-of-a-binary-tree/
+What is Diameter Of a Tree: Diameter of tree is defined as A longest path or route between any two nodes in a tree.
+The path may or may not for through the root.
+Diameter of a tree w.r.t root can be defined as
+
+Maximum(Diameter of left subtree, Diameter of right subtree, Longest path between two nodes which passes through the root.)
+
+Now the diameter of left and right subtree’s can be solved recursively. 
+And Longest path between two nodes which passes through the root can be calculated 
+as 1 + height of left subtree + height of right subtree.
+*/
+
 int Diameter(Node* root) {
-    return 0;
+    if(root == 0) {
+        return 0;
+    }
+    int leftHeight = Height(root->left);
+    int rightHeight = Height(root->right);
+
+    int leftDia = Diameter(root->left);
+    int rightDia = Diameter(root->right);
+    int rootDia = leftHeight + rightHeight + 1;
+    return max(rootDia, max(leftDia, rightDia));
 }
 
 void _Diameter() {

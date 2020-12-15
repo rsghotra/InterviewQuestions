@@ -239,6 +239,42 @@ void FindUniqueBTs(int n) {
     cout << "Number of Unique BT from " << n << " nodes " << (numer/deno) << endl;
 }
 
+int SearchSplit(vector<int> vect, int start, int end, int data) {
+    for(int i = start; i <= end; i++) {
+        if(vect.at(i) == data) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+Node* GenerateBT(vector<int> inorder, vector<int> preorder, int inorderStart, int inorderEnd) {
+    static int preIndex = 0;
+    if(inorderStart > inorderEnd) {
+        return nullptr;
+    }
+    Node* root = new Node;
+    root->data = preorder[preIndex];
+    preIndex++;
+    if(inorderStart == inorderEnd) {
+        root->left = root->right = 0;
+        return root;
+    }
+
+    int splitIndex = SearchSplit(inorder, inorderStart, inorderEnd, root->data);
+    root->left = GenerateBT(inorder, preorder, inorderStart, splitIndex-1);
+    root->right = GenerateBT(inorder, preorder, splitIndex+1, inorderEnd);
+    return root;
+}
+
+void _GenerateBT() {
+    vector<int> inorder{7,6,9,3,4,5,8,2,1};
+    vector<int> preorder{4,7,9,6,3,2,5,8,1};
+    cout << "Generated BT: ";
+    root = GenerateBT(inorder, preorder, 0, inorder.size() -1);
+    InOrder();
+}
+
 int main() {
     CreateBT();
     LevelOrder();
@@ -250,5 +286,6 @@ int main() {
     _Sum();
     FindUniqueBTs(5);
     _Diameter();
+    _GenerateBT();
     return 0;
 }

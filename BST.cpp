@@ -109,6 +109,47 @@ Node* Delete(Node* ptr, int data) {
     }
 }
 
+Node* GenerateBST(const vector<int>& preorder) {
+    stack<Node*> stk;
+    Node* root = new Node; root->left = root->right = 0;
+    root->data = preorder.at(0);
+
+
+    stk.push(root);
+    Node* ptr = root;
+    Node* temp = 0;
+    int i = 1;
+
+    while(i < preorder.size()) {
+        if(ptr->data > preorder[i]) {
+            temp = new Node; temp->left = temp->right = 0;
+            temp->data = preorder[i];
+            ptr->left = temp;
+            ptr = temp;
+            stk.push(temp);
+            i++;
+        //pitfall - check if stack is empty
+        } else if(preorder[i] > ptr->data && (stk.empty() || preorder[i] < stk.top()->data)) {
+            temp = new Node; temp->left = temp->right = 0;
+            temp->data = preorder[i];
+            ptr->right = temp;
+            ptr = temp;
+            //watch out  no need to push temp on stack when you have finalised right child
+            i++;
+        } else {
+            //check out i will not increment hence while loop
+            ptr = stk.top();
+            stk.pop();
+        }
+    }
+    return root;
+}
+
+void _GenerateBST() {
+    vector<int> preorder{30,20,10,15,25,40,50,45};
+    root = GenerateBST(preorder);
+}
+
 void CreateBST() {
     root = Insert(root, 10);
     Insert(root, 20);
@@ -122,6 +163,8 @@ int main() {
     CreateBST();
     LevelOrder();
     Delete(root, 10);
+    LevelOrder();
+    _GenerateBST();
     LevelOrder();
     return 0;
 }

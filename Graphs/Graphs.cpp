@@ -13,26 +13,44 @@ void display(vector<vector<int> >&  matrix) {
 }
 
 void BFS(vector<vector<int> > grph, int i) {
-    int u,  v;
+    int u, v;
     queue<int> vtx;
-    int* visited = new int[grph.size()](); //initialized with zeros
+    int* visited = new int[grph.size()]();
     cout << "BFS: ";
     cout << i << " ";
-    visited[i] = 1;
     vtx.push(i);
-
+    visited[i] = 1;
     while(!vtx.empty()) {
         u = vtx.front();
         vtx.pop();
-        for(int v = 1; v <= grph[0].size(); v++) {
-            //check if edge exists and if the edge is not visited
-            if(grph[u][v] != 0 && visited[v] == 0) {
+        for(v = 0; v < grph[0].size(); v++) {
+            //check if there is an edge
+            if(grph[u][v] == 1 && visited[v] == 0) {
                 cout << v << " ";
                 visited[v] = 1;
                 vtx.push(v);
             }
         }
     }
+}
+
+void DFS(const vector<vector<int>>& grph, int u) {
+    static int* visited = new int[grph.size()]();
+    if(visited[u] == 0) {
+        cout << u << " ";
+        visited[u] = 1;
+        for(int v = 0; v < grph[0].size(); v++) {
+            if(grph[u][v] == 1 && visited[v] == 0) {
+                DFS(grph, v);
+            }
+        }
+    }
+}
+
+void _DFS(const vector<vector<int>>& grph, int u) {
+    cout << "\nDFS: ";
+    DFS(grph, u);
+    cout << endl;
 }
 
 int main()
@@ -46,12 +64,13 @@ int main()
         {0, 1, 0, 1, 0, 0, 0, 0},
         {0, 1, 1, 0, 1, 1, 0, 0},
         {0, 1, 0, 1, 0, 1, 0, 0},
-        {0, 0, 0, 1, 1, 0, 1, 1},
+        {0, 1, 0, 1, 1, 0, 1, 1},
         {0, 0, 0, 0, 0, 1, 0, 0},
         {0, 0, 0, 0, 0, 1, 0, 0}
     };
     cout << "Displaying Graph" << endl;
     display(Graph);
-    BFS(Graph, 1);
+    BFS(Graph, 2);
+    _DFS(Graph, 1);
     return 0;
 }

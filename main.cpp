@@ -73,8 +73,34 @@ void PreOrder() {
     cout << endl;
 }
 
-void PostOrder(Node* root) {
+void PostOrder() {
+    if(root == 0) {
+        return;
+    }
+    //MUST TAKE LONG INT AND UINTPTR_T and reinterpret case
+    stack<long int> stk;
+    Node* t = root;
 
+    cout << "PostOrder: ";
+    while(t != 0 || !stk.empty()) {
+        if( t!= 0) {
+            stk.push(reinterpret_cast<uintptr_t>(t));
+            t = t->left;
+        } else {
+            long int temp = stk.top();
+            stk.pop();
+            if(temp < 0) {
+                t = reinterpret_cast<Node*>((-1)*(temp));
+                cout << t->data << " ";
+                t = 0; //PITFALL
+            } else {
+                t = reinterpret_cast<Node*>(temp);
+                t = t->right;
+                stk.push(-temp);
+            }
+        }
+    }
+    cout << endl;
 }
 
 void CreateBT() {
@@ -112,7 +138,7 @@ void CreateBT() {
 }
 
 int SplitIndex(Node* root, int data) {
-
+    return 0;
 }
 
 void GenerateBT(int inorder[], int preorder[], int inStart, int inEnd) {
@@ -162,7 +188,11 @@ void _Count() {
 }
 
 int Diameter(Node* root) {
+    return 0;
+}
 
+void _Diameter() {
+    cout << "Diameter of the tree is: " << Diameter(root) << endl;
 }
 
 int Combination(int n, int r) {
@@ -179,7 +209,7 @@ int fact(int n) {
     return n * fact(n-1);
 }
 
-int FindUniqueBTs(int n) {
+void FindUniqueBTs(int n) {
     /*
         - Catalan Number = 2nCn/n+1
     */
@@ -193,9 +223,11 @@ int main() {
     LevelOrder();
     PreOrder();
     InOrder();
+    PostOrder();
     _Height();
     _Count();
     _Sum();
     FindUniqueBTs(5);
+    _Diameter();
     return 0;
 }

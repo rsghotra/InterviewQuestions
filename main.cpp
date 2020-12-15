@@ -120,23 +120,72 @@ void GenerateBT(int inorder[], int preorder[], int inStart, int inEnd) {
 }
 
 int Height(Node* root) {
-    
+    if(root == 0) {
+        return 0;
+    }
+    if(root->left == 0 && root->right == 0) {
+        return 0;
+    }
+    int left = Height(root->left);
+    int right = Height(root->right);
+    if(left > right) {
+        return left + 1;
+    } else {
+        return right + 1;
+    }
+}
+
+void _Height() {
+    cout << "Height of the tree is: " << Height(root) << endl;
 }
 
 int Sum(Node* root) {
+    if(root == 0) {
+        return 0;
+    }
+    return root->data + Sum(root->left) + Sum(root->right);
+}
 
+void _Sum() {
+    cout << "Sum of all nodes in the tree is: "  << Sum(root) << endl;
 }
 
 int Count(Node* root) {
+    if(root == 0) {
+        return 0;
+    }
+    return 1 + Count(root->left) + Count(root->right);
+}
 
+void _Count() {
+    cout << "Number of Nodes: " << Count(root) << endl;
 }
 
 int Diameter(Node* root) {
 
 }
 
-int FindUniqueBTs(int num_of_nodes) {
+int Combination(int n, int r) {
+    if(n == r || r == 0) {
+        return 1;
+    }
+    return Combination(n-1, r) + Combination(n-1, r-1);
+}
 
+int fact(int n) {
+    if(n == 0) {
+        return 1;
+    }
+    return n * fact(n-1);
+}
+
+int FindUniqueBTs(int n) {
+    /*
+        - Catalan Number = 2nCn/n+1
+    */
+    int numer = Combination(2*n, n);
+    int deno = n+1;
+    cout << "Number of Unique BT from " << n << " nodes " << (numer/deno) << endl;
 }
 
 int main() {
@@ -144,5 +193,9 @@ int main() {
     LevelOrder();
     PreOrder();
     InOrder();
+    _Height();
+    _Count();
+    _Sum();
+    FindUniqueBTs(5);
     return 0;
 }

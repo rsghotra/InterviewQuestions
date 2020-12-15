@@ -1,10 +1,6 @@
 #include<iostream>
 using namespace std;
 
-void KruskalMinCost(int[][8], int StartVtx) {
-
-}
-
 int Union(){
 
 }

@@ -113,3 +113,93 @@ int main(void)
     printWords(number, n);
     return 0;
 }
+
+
+ //Design a set of class definitions (interfaces, api) for wrapping access to a file system.
+ 
+//  class File: public Folder {
+//     public:
+//         File();
+//         File(string path);
+//         File CreateFile(string path);
+//         File OpenFile();
+//         bool CloseFile();
+//         bool Exists();
+//         string GetName();
+//         void Rename(string path);
+//         bool SetData(string data);
+//         iostream& operator<<(File& file, T data);
+// };
+
+// class Folder {
+//     private:
+//         string Name;
+//         Time dateOfCreation;
+//         File files[];
+//         File file;
+//     public:
+//         Folder(){}
+//         Folder CreateDirectory(string path)
+//         Folder Open(string path)
+//         bool Close()
+//         Files[] getFiles();
+//         Folder[] getSubs();
+//         Time getCreationTime()
+//         bool Exists()
+//         Folder GetParent()
+//         Folder Move(string destination)
+// };
+ 
+ 
+//  class FileData:  {
+//      private:
+//      public:
+//          virtual void setData(File file, T data) = 0;
+//          virtual void modifyData(File file, T data) = 0;
+//          virtual T convert(File file, T1 data, T2 data)=0;
+// };
+
+// Write a function that takes in a root and a file name, and returns the count of the files with that name. 
+
+// "c:\test" <- Input 1
+// "test.txt" <- Input 2
+// "c:\test\inner\test.txt" <- Possible folder structure
+
+int CountSameNames(Folder folder, string name) {
+    int count = 0;
+    File files[] = folder.getFiles();
+    for(int i = 0; i < files.length(); i++) {
+        if(files[i].getName() == name) {
+            count++;
+    }
+    name = "test.txt"
+    folder == "c:\test"
+    Folder folders[] = folder.getFolders();
+    for(int i = 0; i < folders.length(); i++) {
+        File files[] = folders[i].getFiles();
+        for(int j = 0; j < files.length(); j++) {
+            if(files[i].GetName() == name) {
+                count++;
+             }
+        }
+    }
+    return count;
+}
+
+         
+int main()
+{
+   string myFileData = "Hello, world";
+   string path = "C:\test\test.txt";  
+   
+   File file = new File();
+   file.CreateFile(path);
+   file.OpenFile();
+   file << myFileData << endl;
+   try {
+    file.CloseFile();
+   } catch(exeception& ex) {
+       cout << ex.what() << endl;
+   }
+   
+}

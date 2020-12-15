@@ -29,7 +29,6 @@ void LevelOrder() {
         }
     }
     cout << endl;
-
 }
 
 void InOrder() {
@@ -135,14 +134,6 @@ void CreateBT() {
             Q.push(temp);
         }
     }
-}
-
-int SplitIndex(Node* root, int data) {
-    return 0;
-}
-
-void GenerateBT(int inorder[], int preorder[], int inStart, int inEnd) {
-
 }
 
 int Height(Node* root) {

@@ -9,16 +9,16 @@
             "command": "g++",
             "args": [
                 "-g",
-                "${workspaceFolder}/main.cpp",
+                "${workspaceFolder}/Trees_Top25/main.cpp",
                 "-o",
-                "${workspaceFolder}/main"
+                "${workspaceFolder}/Trees_Top25/main"
             ],
             "problemMatcher":[]
         },
         {
             "label": "run",
             "type":  "shell",
-            "command": "${workspaceFolder}/main",
+            "command": "${workspaceFolder}/Trees_Top25/main",
             "dependsOn":[
                 "build"
             ],

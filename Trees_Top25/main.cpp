@@ -88,10 +88,37 @@ Node* ConvertBST(vector<int>& vect, int start, int end) {
     return root;
 }
 
+int isBalanced(Node* root) {
+    if(root == 0) {
+        return 0;
+    }
+    if(root && root->left==0 && root->right == 0) {
+        return 0;
+    }
+    int leftHeight = Height(root->left);
+    int rightHeight = Height(root->right);
+    if(abs(leftHeight - rightHeight) > 1) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+void CheckBalance() {
+    int result = isBalanced(root);
+    if(result == 1) {
+        cout << "Tree is  balanced" << endl;
+    }
+    else {
+        cout << "Tree is not balanced" << endl;
+    }
+}
+
 int main() {
     vector<int> vect{1,2,3,4,5,6,7};
     root = ConvertBST(vect, 0, vect.size()-1);
     LevelOrder();
     cout << "Height of the tree: " << Height(root) << endl;
+    CheckBalance();
     return 0;
 }

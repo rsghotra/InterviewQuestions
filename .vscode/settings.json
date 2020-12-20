@@ -46,7 +46,17 @@
         "stack": "cpp",
         "queue": "cpp",
         "array": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "algorithm": "cpp",
+        "chrono": "cpp",
+        "condition_variable": "cpp",
+        "map": "cpp",
+        "mutex": "cpp",
+        "ratio": "cpp",
+        "set": "cpp",
+        "sstream": "cpp",
+        "thread": "cpp",
+        "xtree": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }

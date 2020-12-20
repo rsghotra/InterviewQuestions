@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string>
 #include<queue>
+#include<vector>
 using namespace std;
 //https://algorithms.tutorialhorizon.com/sorted-array-to-binary-search-tree-of-minimal-height/
 struct Node {
@@ -115,10 +116,11 @@ void CheckBalance() {
 }
 
 int main() {
-    vector<int> vect{1,2,3,4,5,6,7};
-    root = ConvertBST(vect, 0, vect.size()-1);
-    LevelOrder();
-    cout << "Height of the tree: " << Height(root) << endl;
-    CheckBalance();
+    vector<int> vect{5,-2,3,1,2};
+
+    // root = ConvertBST(vect, 0, vect.size()-1);
+    // LevelOrder();
+    // cout << "Height of the tree: " << Height(root) << endl;
+    // CheckBalance();
     return 0;
 }
